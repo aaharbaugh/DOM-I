@@ -40,3 +40,67 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+//nav links
+let navLinks = document.querySelectorAll("a");
+let count = 0;
+navLinks.forEach(nav => {
+  count++
+  nav.textContent = siteContent["nav"]["nav-item-" + count]
+})
+
+//cta button
+let ctaButton = document.querySelector('.cta-text button');
+ctaButton.textContent = siteContent["cta"]['button']
+
+//cta h1
+let ctaH1 = document.querySelector('.cta-text h1');
+ctaH1.textContent = siteContent["cta"]["h1"]
+
+//cta img
+let ctaImg = document.querySelector('#cta-img');
+ctaImg.src = siteContent["cta"]["img-src"]
+
+//main content
+
+count = 0;
+let topContent = document.querySelector('.main-content');
+let mainContentArray = [...Object.values(siteContent["main-content"])]
+
+function topContentReplace(index, index2){
+  topContent.children[index].children[index2].childNodes.forEach(element => {
+    if(element.nodeName === '#text'){
+      console.log('skipping')
+    } else {
+      element.textContent = mainContentArray[count]
+      count++
+    }
+  })
+}
+
+//top content
+topContentReplace(0,0)
+topContentReplace(0,1)
+
+//middle image
+count++
+let middleImg = document.querySelector('#middle-img');
+middleImg.src = siteContent["main-content"]["middle-img-src"]
+
+//bottom content
+topContentReplace(2,0)
+topContentReplace(2,1)
+topContentReplace(2,2)
+
+//contact
+count = 0;
+let contactSection = document.querySelector('.contact')
+let contactArray = [...Object.values(siteContent["contact"])]
+contactSection.childNodes.forEach(element => {
+  if(element.nodeName === '#text'){
+    console.log('skipping')
+  } else {
+    element.textContent = contactArray[count]
+    count++
+  }
+})
