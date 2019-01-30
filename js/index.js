@@ -42,12 +42,31 @@ let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
 
 //nav links
-let navLinks = document.querySelectorAll("a");
+let navLinks = document.querySelector("nav");
 let count = 0;
-navLinks.forEach(nav => {
-  count++
-  nav.textContent = siteContent["nav"]["nav-item-" + count]
+navLinks.childNodes.forEach(nav => {
+  if(nav.nodeName === '#text'){
+    console.log('skipping')
+  } else {
+    nav.textContent = siteContent["nav"]["nav-item-" + count]
+    //stretch task
+    nav.style.color = "green";
+    count++
+  }
 })
+
+//stretch task
+let newButton = document.createElement('a')
+newButton.href = "http://www.google.com"
+newButton.textContent = "Google"
+newButton.style.color = "green"
+navLinks.appendChild(newButton)
+
+let newButton2 = document.createElement('a')
+newButton2.href = "http://www.lambdaschool.com"
+newButton2.textContent = "Lambda"
+newButton2.style.color = "green"
+navLinks.appendChild(newButton2)
 
 //cta button
 let ctaButton = document.querySelector('.cta-text button');
@@ -64,7 +83,7 @@ ctaImg.src = siteContent["cta"]["img-src"]
 //main content
 
 count = 0;
-let topContent = document.querySelector('.main-content');
+let topContent = document.querySelector('.main-content'); //didnt like select every element on page seperately. 
 let mainContentArray = [...Object.values(siteContent["main-content"])]
 
 function topContentReplace(index, index2){
